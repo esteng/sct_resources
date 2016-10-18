@@ -1,3 +1,4 @@
+import csv
 """
 Stress and word type information from: CELEX
 Frequency information from: Subtlex-DE (http://crr.ugent.be/archives/534)
@@ -54,10 +55,12 @@ def getStress(path):
 					index = i+1
 				else:
 					numString = numString + "0"
-			words[ortho] = [numString, "", ""]
+			if numString == "":
+				numString = "None"
+			words[ortho] = [numString, "None", "None"]
 
 			if Sortho is not "":
-				words[Sortho] = [numString, "", ""]
+				words[Sortho] = [numString, "None", "None"]
 		
 def getWordType(path):
 	with open(path, "r") as f1:
@@ -71,27 +74,27 @@ def getWordType(path):
 				try:
 					words[split[1]][2] = "Function"
 				except KeyError:
-					words[split[1]] = ["","","Function"]
+					words[split[1]] = ["None","None","Function"]
 					#print(split[1])
 				
 				if sharp is not "":
 					try:
 						words[sharp][2] = "Function"
 					except KeyError:
-						words[sharp] = ["","","Function"]
+						words[sharp] = ["None","None","Function"]
 						#print(sharp)
 			else:
 				try:
 					words[split[1]][2] = "Content"
 				except KeyError:
-					words[split[1]] = ["","","Content"]
+					words[split[1]] = ["None","None","Content"]
 					#print(split[1])
 				
 				if sharp is not "":
 					try:
 						words[sharp][2] = "Content"
 					except KeyError:
-						words[sharp] = ["","","Content"]
+						words[sharp] = ["None","None","Content"]
 						#print(sharp)
 
 	
@@ -103,24 +106,31 @@ def getFrequency(path):
 			split = line.split("\t")
 
 			word = replaceSubtlex(split[0])
-			if word != split[0]:
-				print(word,split[0])
+			# if word != split[0]:
+			# 	print(word,split[0])
 
 			try:
-				words[word][1] = split[4]
+				words[word][1] = split[4].replace(",",".")
 			except KeyError:
-				words[word] = ["", split[4], ""]
+				words[word] = ["None", split[4].replace(",","."), "None"]
 				#print(word)
 
 getStress("gpw.cd")
 getWordType("gsl.cd")
 getFrequency('SUBTLEX-DE.txt')
 
-with open("GermanEnrichmentData.csv", 'w') as f2:
-	f2.write('word,stress pattern,frequency,word type\n')
-	for k,v in words.items():
+f2 = open("GermanEnrichmentData.csv", 'w')
+f2cw = csv.writer(f2)
 
-		f2.write("{},{},{},{}\n".format(k,v[0],v[1],v[2]))
+
+f2cw.writerow(['word','stress pattern','frequency','word type'])
+for k,v in words.items():
+	# if k == 'ruhen':
+	# 	print(k)
+	# 	print(v[0])
+	# 	print(v[1])None
+	# 	print(v[2])
+	f2cw.writerow([k,v[0],v[1],v[2]])
 
 
 
