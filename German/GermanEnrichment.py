@@ -130,6 +130,8 @@ for k,v in words.items():
 	# 	print(v[0])
 	# 	print(v[1])None
 	# 	print(v[2])
+	if v[2] == None:
+		v[2] = "Content"
 	f2cw.writerow([k,v[0],v[1],v[2]])
 
 

@@ -83,4 +83,6 @@ f2 = open('PortugueseEnrichmentData.csv', 'w')
 f2CW = csv.writer(f2)
 f2CW.writerow(['word','frequency','word type', 'stress pattern', 'neighborhood density'])
 for k,v in words.items():
+	if v[2] == "" or v[2] == None:
+		v[2] = "Content"
 	f2CW.writerow([k, v[0],v[1],v[2],v[3]])

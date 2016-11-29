@@ -5,7 +5,7 @@ import urllib.request
 """
 Frequency info from https://github.com/hermitdave/FrequencyWords/
 
-word type information gotten from wiktionary (https://en.wiktionary.org/wiki/Category:Bulgarian_lemmas)
+word type information gotten from wiktionary (https://en.wiktionary.org/wiki/Category:Serbo-Croatian_lemmas)
 
 pronouns, prepositions, and conjunctions are function words, all others are content
 """
@@ -33,8 +33,6 @@ def get_function_words():
 
 	for match in (conjmatches+pronmatches+prepmatches):
 		rmatch = wordregex.search(match).group(0)
-		if("којешта" in rmatch):
-			print(match)
 		functionwords.append(rmatch[2:-1])
 
 
@@ -61,13 +59,15 @@ def getFrequency(path):
 		freq = (int(splitline[1])/total)*1000000
 
 		
-		words[word] = freq
+		words[word] = [freq, None]
+
+
 
 fwords= get_function_words()
 getFrequency('sr_full.txt')
 f2 = open('CroatianEnrichmentData.csv', 'w')
 f2CW = csv.writer(f2)
-f2CW.writerow(['word','word type','frequency'])
+f2CW.writerow(['word','word type','frequency', 'stress pattern'])
 
 
 for k,v in words.items():
@@ -75,4 +75,4 @@ for k,v in words.items():
 		wordtype = 'function'
 	else:
 		wordtype = 'content'
-	f2CW.writerow([k,wordtype, v])
+	f2CW.writerow([k,wordtype, v[0], v[1]])

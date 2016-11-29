@@ -1,0 +1,100 @@
+word "stress pattern"
+nem 0
+phở 0
+leo 0
+tiếng 0
+thành 
+ADN 000
+à 0
+phi_trường 0
+A-rập_thống_nhất_Ê-mi-rát 000
+té 0
+đồng 
+ít 0
+nghe 0
+da 0
+thánh 
+noi 0
+với 0
+bia 0
+kim 0
+trang 0
+và 0
+phi 
+từ_điển 00
+voi 0
+chi 
+em 0
+au 
+loan 
+tre 0
+ga 0
+ta 0
+蘊 00
+ca 0
+nhanh 
+tu 
+am 0
+đô_la 00
+na 0
+than 0
+hun 
+titan 0
+u 
+la 0
+ho 0
+ti 
+ra 0
+sả 0
+con 0
+TV 
+li 
+me 0
+long 
+rang 0
+kali 0
+hay 
+go 0
+san 0
+b 0000
+ba 0
+ban 0
+sung 
+lam 0
+sang 0
+bi 
+du 
+bo 0
+hung 
+ven 0
+d 0
+ai 0
+so 0
+e 0
+song 
+pin 0
+mi 
+man 0
+van 0
+say 
+in 0
+X 00000
+men 0
+tao 0
+tin 0
+may 
+tan 0
+to 0
+vi 
+can 0
+ao 0
+son 0
+qua 0
+y 
+sun 
+an 0
+i 
+be 0
+o 0
+A 0
+non 0

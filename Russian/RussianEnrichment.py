@@ -56,7 +56,8 @@ def parseFile(path,writepath):
 
 
 	for k,v in words.items():
-
+		if v[1] == "" or v[1] == None:
+			v[1] = "Content"
 		f2cw.writerow([k,v[0],v[1],v[2]])
 
 

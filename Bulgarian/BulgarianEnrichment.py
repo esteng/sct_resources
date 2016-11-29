@@ -46,15 +46,18 @@ def get_function_words():
 def getFrequency(path):
 	with open(path,errors='ignore') as f:
 		lines = f.readlines()
+	total = sum([int(re.split('\s', x)[1]) for x in lines])
+
 	for line in lines:
 		splitline = re.split('\s', line)
 		
 		word = splitline[0]
 		
-		freq = (int(splitline[1])/116201132)*1000000
+		freq = (int(splitline[1])/total)*1000000
 
 		
 		words[word] = freq
+
 
 fwords= get_function_words()
 getFrequency('bg_full.txt')
