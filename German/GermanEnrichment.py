@@ -56,11 +56,11 @@ def getStress(path):
 				else:
 					numString = numString + "0"
 			if numString == "":
-				numString = "None"
-			words[ortho] = [numString, "None", "None"]
+				numString = None
+			words[ortho] = [numString, None, None]
 
 			if Sortho is not "":
-				words[Sortho] = [numString, "None", "None"]
+				words[Sortho] = [numString, None, None]
 		
 def getWordType(path):
 	with open(path, "r") as f1:
@@ -74,27 +74,27 @@ def getWordType(path):
 				try:
 					words[split[1]][2] = "Function"
 				except KeyError:
-					words[split[1]] = ["None","None","Function"]
+					words[split[1]] = [None, None, "Function"]
 					#print(split[1])
 				
 				if sharp is not "":
 					try:
 						words[sharp][2] = "Function"
 					except KeyError:
-						words[sharp] = ["None","None","Function"]
+						words[sharp] = [None,None,"Function"]
 						#print(sharp)
 			else:
 				try:
 					words[split[1]][2] = "Content"
 				except KeyError:
-					words[split[1]] = ["None","None","Content"]
+					words[split[1]] = [None,None,"Content"]
 					#print(split[1])
 				
 				if sharp is not "":
 					try:
 						words[sharp][2] = "Content"
 					except KeyError:
-						words[sharp] = ["None","None","Content"]
+						words[sharp] = [None,None,"Content"]
 						#print(sharp)
 
 	
@@ -112,7 +112,7 @@ def getFrequency(path):
 			try:
 				words[word][1] = split[4].replace(",",".")
 			except KeyError:
-				words[word] = ["None", split[4].replace(",","."), "None"]
+				words[word] = [None, split[4].replace(",","."), None]
 				#print(word)
 
 getStress("gpw.cd")
@@ -125,12 +125,7 @@ f2cw = csv.writer(f2)
 
 f2cw.writerow(['word','stress pattern','frequency','word type'])
 for k,v in words.items():
-	# if k == 'ruhen':
-	# 	print(k)
-	# 	print(v[0])
-	# 	print(v[1])None
-	# 	print(v[2])
-	if v[2] == None:
+	if v[2] in [None, ""]:
 		v[2] = "Content"
 	f2cw.writerow([k,v[0],v[1],v[2]])
 

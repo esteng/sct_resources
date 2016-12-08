@@ -37,9 +37,9 @@ def getWordType(path):
 		if pos in ['pro','prep' ]:
 			word_type = 'Function'
 		try:
-			words[word][1] = word_type
+			words[word][2] = word_type
 		except KeyError:
-			words[word] = ['',word_type,'','']
+			words[word] = [None,None,word_type,None]
 		
 
 def getStress(path):
@@ -57,9 +57,9 @@ def getStress(path):
 				pattern+='0'
 		word = splitline[0].replace('\"', "")
 		try:
-			words[word][2] = pattern
+			words[word][1] = pattern
 		except KeyError:
-			words[word] = ['','',pattern, '']
+			words[word] = [None,pattern,None,None]
 
 def getND(path):
 	with open(path,errors='ignore') as f1:
@@ -81,7 +81,7 @@ getND('psc.csv')
 
 f2 = open('PortugueseEnrichmentData.csv', 'w')
 f2CW = csv.writer(f2)
-f2CW.writerow(['word','frequency','word type', 'stress pattern', 'neighborhood density'])
+f2CW.writerow(['word','frequency','stress pattern', 'word type',  'neighborhood density'])
 for k,v in words.items():
 	if v[2] == "" or v[2] == None:
 		v[2] = "Content"
