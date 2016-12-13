@@ -1,3 +1,4 @@
+import sys
 import re
 import csv
 import urllib.request
@@ -56,14 +57,43 @@ def getFrequency(path):
 		freq = (int(splitline[1])/total)*1000000
 
 		
-		words[word] = freq
+		words[word] = [freq, None]
+
+def getPitchAccent(path):
+    # 1 corresponds to acute, 2 to grave
+    one = re.compile('^"(?!")')
+    two = re.compile('^"".*')
+    with open(path, errors='ignore') as f2:
+        pitchlines = f2.readlines()
+    for line in pitchlines:
+        split = line.split(";")
+       
+        transcription = split[11].strip()
+        word = split[0].strip()
+        sequence = ""
+        syllables = transcription.split("$")
+        for syl in syllables:
+            if one.match(syl.strip()):
+                sequence += "1"
+            elif two.match(syl.strip()):
+                sequence+="2"
+            else:
+                sequence+="0"
+        try:
+        	# currently just replacing with most recent pitch accent, might be better ways to do this
+            words[word][1] = sequence
+        except KeyError:
+            words[word] = [None, sequence]
+        # print(line) if word == 'Sol' else 3
+
 
 
 fwords= get_function_words()
 getFrequency('sv_full.txt')
+getPitchAccent("NST svensk leksikon/swe030224NST.pron/swe030224NST.pron")
 f2 = open('SwedishEnrichmentData.csv', 'w')
 f2CW = csv.writer(f2)
-f2CW.writerow(['word','word type','frequency'])
+f2CW.writerow(['word','word type','frequency', 'pitch accent'])
 
 
 for k,v in words.items():
@@ -71,4 +101,4 @@ for k,v in words.items():
 		wordtype = 'function'
 	else:
 		wordtype = 'content'
-	f2CW.writerow([k,wordtype, v])
+	f2CW.writerow([k,wordtype, v[0], v[1]])
