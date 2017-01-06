@@ -142,17 +142,17 @@ if __name__ == "__main__":
 	for i,proc in enumerate(jobs):
 		print('finishing proc {}'.format(i))
 		proc.join()
-
+	print("about to get results")
 	results = [q.get() for i in range(0, len(lines), step)]
-	totaldict = {}
-
-	print(len(totaldict))
+	print("got the results!")
 	f3 = open("stresses.txt", "w")
 	f3cw = csv.writer(f3, delimiter = " ")
 	f3cw.writerow(["word","stress pattern"])
-	for d in results:
-		for k,v in d.items():
-			f3cw.writerow([k, v])
+	for i,d in enumerate(results):
+		print("{} results from process {}".format(len(d), i))
+	# 	for k,v in d.items():
+	# 		if re.match("0+", v) is None:
+	# 			f3cw.writerow([k, v])
 
 
 
