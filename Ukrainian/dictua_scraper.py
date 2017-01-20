@@ -21,7 +21,7 @@ myopener = MyOpener()
 url = "http://lcorp.ulif.org.ua/dictua/"
 
 f=  myopener.open(url)
-soup = BeautifulSoup(f)
+soup = BeautifulSoup(f,'lxml')
 
 viewstate = soup.select("#__VIEWSTATE")[0]['value']
 eventvalidation = soup.select("#__EVENTVALIDATION")[0]['value']
@@ -30,15 +30,11 @@ formData = (
     ('__EVENTVALIDATION', eventvalidation),
     ('__VIEWSTATE', viewstate),
     ('__VIEWSTATEENCRYPTED',''),
-    ('txt_offname',''),
-    ('ddl_dist','0'),
-    ('txt_dist_on',''),
-    ('ddl_state','2'),
-    ('btn_state','Search'),
-    ('txt_stateon',''),
-    ('hdn_tabchoice','3')
+    ('ctl00_ContentPlaceHolder1_tsearch','слова'),
+    ('ctl00_ContentPlaceHolder1_search','')
 )
-
+    # ('ctl00$ContentPlaceHolder1$tsearch','слова'),
+    # ('ctl00_ContentPlaceHolder1_search','')
 
 encodedFields = urllib.parse.urlencode(formData)
 f = myopener.open(url, encodedFields)
