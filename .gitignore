@@ -11,3 +11,5 @@ Polish/subtlex-pl 2.csv
 *.txt
 
 *.u8
+Croatian/CroatianEnrichmentData.csv
+Turkish/TurkishEnrichmentData.csv
