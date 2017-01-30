@@ -66,12 +66,20 @@ def getFrequency(path):
 def getStress(path):
 	with open(path, errors='ignore') as f:
 		lines = f.readlines()
+	print("there are ", len(lines), " words in stress file")
+	already_in = 0
+	added = 0
+
 	for line in lines:
-		split = re.split("\s", line)
+		split = re.split("\s(?=[01])", line)
 		try: 
-			words[split[0]][1] = split[1]
+			
+			words[split[0]][1] = split[1].strip()
+			already_in +=1
 		except KeyError:
-			words[split[0]] = [None, split[1]]
+			words[split[0]] = [None, split[1].strip()]
+			added +=1
+	print("added: {} already_in: {} total: {}".format(added, already_in, added+already_in))
 
 
 
