@@ -74,9 +74,11 @@ def getStress(path):
 			words[split[0]] = [None, split[1]]
 
 
+
+
 fwords= get_function_words()
 getFrequency('uk_full.txt')
-getStress('stresses.txt')
+getStress('stresses_from_dictua.txt')
 f2 = open('UkrainianEnrichmentData.csv', 'w')
 f2CW = csv.writer(f2)
 f2CW.writerow(['word','word type','frequency', 'stress pattern'])

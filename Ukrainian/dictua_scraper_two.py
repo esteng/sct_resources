@@ -92,6 +92,8 @@ def make_stress_pattern(word, stressed):
     return pattern
 
 def get_stress(words):
+    
+
     for word in words:
         if word!='':
             for i, char in enumerate(word):
@@ -99,9 +101,11 @@ def get_stress(words):
                     stressed = i-1
                     word = re.sub(u"\u0301", "", word)
                     stress_pattern = make_stress_pattern(word, stressed)
+                    with open("stresses_from_dictua.txt",'a') as f3:   
+                        f3.write(word+ " "+stress_pattern+"\n")
                     # print("adding ", word, ' : ', stress_pattern)
                     stress_dict[word] = stress_pattern
-
+                    
 
 def get_all_words():
     with open('uk_full.txt') as f1:
@@ -117,6 +121,6 @@ def get_all_words():
             pass
 
 get_all_words()
-with open("stresses_from_dictua.txt",'w') as f3:
+with open("stresses_from_dictua_dict.txt",'w') as f3:
     for key, entry in stress_dict.items():
         f3.write(key, " ", entry, "\n")
