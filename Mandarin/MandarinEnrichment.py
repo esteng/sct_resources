@@ -2,6 +2,7 @@
 #encoding: utf-8
 
 import re
+import pinyin
 import csv
 import os
 
@@ -77,7 +78,7 @@ if __name__ == "__main__":
 
     f1 = open("/Users/elias/sct_resources/Mandarin/MandarinEnrichmentData.csv","w")
     f1cw = csv.writer(f1)
-    f1cw.writerow(['word','frequency','word type', 'tone', 'pinyin'])
+    f1cw.writerow(['pinyin','word','frequency','word type'])
 
     
     t,s=0,0
@@ -89,7 +90,7 @@ if __name__ == "__main__":
             word_type = "Function"
         else:
             word_type = "Content"
-        towrite.extend((k,v,word_type))
+        towrite.extend((pinyin.get(k, format="numerical"), k,v,word_type))
         # simplewrite.extend((k,v,word_type))
         # d = pinyins[0]
         # try:
@@ -118,7 +119,7 @@ if __name__ == "__main__":
         #     f1cw.writerow(towrite)
         #     f1cw.writerow(simplewrite)
         f1cw.writerow(towrite)
-    print("{} traditional words have pinyin/tone, {} simplified words have pinyin, tone".format(t,s))
+    # print("{} traditional words have pinyin/tone, {} simplified words have pinyin, tone".format(t,s))
 
 
 
